@@ -51,6 +51,8 @@ dependencies {
     //8. Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
 
+    // gradle
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'  // 필수
 
     // 1. Lombok Test
     testImplementation 'org.projectlombok:lombok'
@@ -62,6 +64,7 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+    jvmArgs '-Xshare:off' // JVM 아규먼트 설정
 }
 test {
     // finalizedBy : 이(test) 작업에 대해 주어진 종료자 작업을 추가

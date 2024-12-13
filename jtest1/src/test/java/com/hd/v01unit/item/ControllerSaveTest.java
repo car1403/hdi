@@ -63,7 +63,7 @@ public class ControllerSaveTest {
 
         //given
         ItemRequestDto reqDto = ItemRequestDto.builder().name("p1").price(1000L).build();
-        String body = new ObjectMapper().writeValueAsString(reqDto); // json 으로 변경한것
+        String body = objectMapper.writeValueAsString(reqDto); // json 으로 변경한것
 
         //stub
         given(itemService.save(any())).willReturn(ItemEntity.builder().id(100L).name("p1").price(1000L).build());
@@ -71,8 +71,7 @@ public class ControllerSaveTest {
         //when
         ResultActions resultActions= mockMvc.perform(post("/api/item/add")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(body)
-                .accept(MediaType.APPLICATION_JSON_UTF8));
+                .content(body));
 
 
         //verify
@@ -94,7 +93,7 @@ public class ControllerSaveTest {
         // when
         ResultActions resultActions = mockMvc.perform(
                 post("/api/item/add")
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(objectMapper.writeValueAsString(reqDto))
         );
 
@@ -112,7 +111,7 @@ public class ControllerSaveTest {
         // when
         ResultActions resultActions = mockMvc.perform(
                 post("/api/item/add")
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(objectMapper.writeValueAsString(reqDto))
         );
 

@@ -24,6 +24,7 @@ public class ItemRequestDto {
 
     public ItemEntity toEntity() {
         return ItemEntity.builder()
+                .id(this.id)
                 .name(this.name)
                 .price(this.price)
                 .build();

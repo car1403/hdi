@@ -4,6 +4,7 @@ import com.hd.common.exception.ErrorCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class Response {
 
     @Getter
     @Builder
-    private static class Body {
+    public static class Body {
         private int state;
         private String result;
         private String massage;
@@ -27,8 +28,8 @@ public class Response {
         private ErrorCode errorCode;
     }
 
-    public static ResponseEntity<?> success(Object data, String msg, HttpStatus status) {
-
+    public  static ResponseEntity<?> success(Object data, String msg, HttpStatus status) {
+        log.info("ResponseEntity---------------------------------------------------");
         Body body = Body.builder()
                 .state(status.value())
                 .data(data)
@@ -55,7 +56,7 @@ public class Response {
      * @param msg 응답 바디 message 필드에 포함될 정보
      * @return 응답 객체
      */
-    public static ResponseEntity<?> success(String msg) {
+    public  static  ResponseEntity<?> success(String msg) {
         return success(Collections.emptyList(), msg, HttpStatus.OK);
     }
 
@@ -63,7 +64,7 @@ public class Response {
      * <p> 데이터만 가진 성공 응답을 반환한다.</p>
      * <pre>
      *     {
-     *         "state" : 201,
+     *         "state" : 200,
      *         "result" : success,
      *         "message" : null,
      *         "data" : [{data1}, {data2}...],
@@ -74,7 +75,10 @@ public class Response {
      * @param data 응답 바디 data 필드에 포함될 정보
      * @return 응답 객체
      */
-    public static ResponseEntity<?> success(Object data) {
+    public static   ResponseEntity<?> success(Object data) {
+        return success(data, null, HttpStatus.OK);
+    }
+    public  static  ResponseEntity<?> successCreate(Object data) {
         return success(data, null, HttpStatus.CREATED);
     }
 
@@ -92,7 +96,7 @@ public class Response {
      *
      * @return 응답 객체
      */
-    public static ResponseEntity<?> success() {
+    public static  ResponseEntity<?> success() {
         return success(Collections.emptyList(), null, HttpStatus.OK);
     }
 
@@ -112,7 +116,7 @@ public class Response {
 //     * @param status 응답 바디 status 필드에 포함될 응답 상태 코드
 //     * @return 응답 객체
 //     */
-    public static ResponseEntity<?> fail(Object data, String msg, HttpStatus status) {
+    public static  ResponseEntity<?> fail(Object data, String msg, HttpStatus status) {
         Body body = Body.builder()
                 .state(status.value())
                 .data(data)
@@ -122,7 +126,9 @@ public class Response {
                 .build();
         return ResponseEntity.ok(body);
     }
-    public static ResponseEntity<?> fail(String msg, HttpStatus status) {
+    public  static  ResponseEntity<?> fail(String msg, HttpStatus status) {
+        log.info("Fail ResponseEntity---------------------------------------------------");
+
         return fail(Collections.emptyList(), msg, status);
     }
 
@@ -142,7 +148,7 @@ public class Response {
      * @param status 응답 바디 status 필드에 포함될 응답 상태 코드
      * @return 응답 객체
      */
-    public static ResponseEntity<?> fail(Object data, ErrorCode errorCode, HttpStatus status) {
+    public static   ResponseEntity<?> fail(Object data, ErrorCode errorCode, HttpStatus status) {
         Body body = Body.builder()
                 .state(status.value())
                 .data(data)
@@ -152,11 +158,13 @@ public class Response {
                 .build();
         return ResponseEntity.ok(body);
     }
-    public static ResponseEntity<?> fail(ErrorCode errorCode, HttpStatus status) {
+    public static  ResponseEntity<?> fail(ErrorCode errorCode, HttpStatus status) {
         return fail(Collections.emptyList(), errorCode, status);
     }
 
-    public static ResponseEntity<?> invalidFields(LinkedList<LinkedHashMap<String, String>> errors) {
+    public static  ResponseEntity<?> invalidFields(LinkedList<LinkedHashMap<String, String>> errors) {
+        log.info("Fail2 ResponseEntity---------------------------------------------------");
+
         Body body = Body.builder()
                 .state(HttpStatus.BAD_REQUEST.value())
                 .data(Collections.emptyList())
