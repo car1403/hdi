@@ -1,7 +1,6 @@
 package com.hd.v01.item.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hd.common.dto.Response;
 import com.hd.common.util.Helper;
 import com.hd.v01.item.dto.request.ItemRequestDto;
