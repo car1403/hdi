@@ -11,6 +11,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -29,14 +30,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = ItemController.class)
 //@AutoConfigureMockMvc
 //@SpringBootTest
+@Import(value = com.hd.common.dto.Response.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName(" Controller Update Test ")
 public class ControllerUpdateTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    Response response;
+//    @MockBean
+//    Response response;
 
     @MockBean
     ItemService itemService;

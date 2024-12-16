@@ -1,5 +1,7 @@
 package com.hd.v01unit.item;
 
+import com.hd.common.exception.ErrorCode;
+import com.hd.common.exception.IdNotFoundException;
 import com.hd.v01.item.entity.ItemEntity;
 import com.hd.v01.item.repository.ItemRepository;
 import com.hd.v01.item.service.ItemService;
@@ -83,8 +85,8 @@ class ServiceUpdateTest {
 
         //verify
         assertThatThrownBy(() -> itemService.modify(itemEntity))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("id를 찾을 수 없습니다."); // Exception 객체가 가지고있는 메시지 검증
+                .isInstanceOf(IdNotFoundException.class)
+                .hasMessage(ErrorCode.ID_NOT_FOUND.getErrorMessage()); // Exception 객체가 가지고있는 메시지 검증
 
     }
 

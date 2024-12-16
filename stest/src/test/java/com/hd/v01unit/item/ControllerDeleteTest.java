@@ -9,6 +9,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -25,14 +26,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = ItemController.class)
 //@AutoConfigureMockMvc
 //@SpringBootTest
+@Import(value = com.hd.common.dto.Response.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName(" Controller Delete Test ")
 public class ControllerDeleteTest {
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    Response response;
 
     @MockBean
     ItemService itemService;
@@ -48,7 +47,7 @@ public class ControllerDeleteTest {
 
     @Test
     @Order(1)
-    @DisplayName("Item Update 정상")
+    @DisplayName("Item Delete 정상")
     void success1() throws Exception {
 
         //given

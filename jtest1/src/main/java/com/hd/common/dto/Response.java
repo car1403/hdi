@@ -15,6 +15,7 @@ import java.util.LinkedList;
 
 
 @Slf4j
+@Component
 public class Response {
 
     @Getter
@@ -28,7 +29,7 @@ public class Response {
         private ErrorCode errorCode;
     }
 
-    public  static ResponseEntity<?> success(Object data, String msg, HttpStatus status) {
+    public  ResponseEntity<?> success(Object data, String msg, HttpStatus status) {
         log.info("ResponseEntity---------------------------------------------------");
         Body body = Body.builder()
                 .state(status.value())
@@ -56,7 +57,7 @@ public class Response {
      * @param msg 응답 바디 message 필드에 포함될 정보
      * @return 응답 객체
      */
-    public  static  ResponseEntity<?> success(String msg) {
+    public   ResponseEntity<?> success(String msg) {
         return success(Collections.emptyList(), msg, HttpStatus.OK);
     }
 
@@ -75,10 +76,11 @@ public class Response {
      * @param data 응답 바디 data 필드에 포함될 정보
      * @return 응답 객체
      */
-    public static   ResponseEntity<?> success(Object data) {
+    public   ResponseEntity<?> success(Object data) {
+        log.info("ResponseEntity----------------------------------------------------"+data);
         return success(data, null, HttpStatus.OK);
     }
-    public  static  ResponseEntity<?> successCreate(Object data) {
+    public   ResponseEntity<?> successCreate(Object data) {
         return success(data, null, HttpStatus.CREATED);
     }
 
@@ -96,7 +98,7 @@ public class Response {
      *
      * @return 응답 객체
      */
-    public static  ResponseEntity<?> success() {
+    public  ResponseEntity<?> success() {
         return success(Collections.emptyList(), null, HttpStatus.OK);
     }
 
@@ -116,7 +118,7 @@ public class Response {
 //     * @param status 응답 바디 status 필드에 포함될 응답 상태 코드
 //     * @return 응답 객체
 //     */
-    public static  ResponseEntity<?> fail(Object data, String msg, HttpStatus status) {
+    public   ResponseEntity<?> fail(Object data, String msg, HttpStatus status) {
         Body body = Body.builder()
                 .state(status.value())
                 .data(data)
@@ -126,7 +128,7 @@ public class Response {
                 .build();
         return ResponseEntity.ok(body);
     }
-    public  static  ResponseEntity<?> fail(String msg, HttpStatus status) {
+    public    ResponseEntity<?> fail(String msg, HttpStatus status) {
         log.info("Fail ResponseEntity---------------------------------------------------");
 
         return fail(Collections.emptyList(), msg, status);
@@ -148,7 +150,7 @@ public class Response {
      * @param status 응답 바디 status 필드에 포함될 응답 상태 코드
      * @return 응답 객체
      */
-    public static   ResponseEntity<?> fail(Object data, ErrorCode errorCode, HttpStatus status) {
+    public    ResponseEntity<?> fail(Object data, ErrorCode errorCode, HttpStatus status) {
         Body body = Body.builder()
                 .state(status.value())
                 .data(data)
@@ -158,11 +160,11 @@ public class Response {
                 .build();
         return ResponseEntity.ok(body);
     }
-    public static  ResponseEntity<?> fail(ErrorCode errorCode, HttpStatus status) {
+    public   ResponseEntity<?> fail(ErrorCode errorCode, HttpStatus status) {
         return fail(Collections.emptyList(), errorCode, status);
     }
 
-    public static  ResponseEntity<?> invalidFields(LinkedList<LinkedHashMap<String, String>> errors) {
+    public   ResponseEntity<?> invalidFields(LinkedList<LinkedHashMap<String, String>> errors) {
         log.info("Fail2 ResponseEntity---------------------------------------------------");
 
         Body body = Body.builder()

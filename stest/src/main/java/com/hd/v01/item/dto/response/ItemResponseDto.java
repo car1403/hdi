@@ -1,16 +1,20 @@
 package com.hd.v01.item.dto.response;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hd.v01.item.entity.ItemEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.AccessType;
 
 import java.time.LocalDateTime;
 
 @Data
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class ItemResponseDto {
     Long id;
     String name;

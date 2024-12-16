@@ -1,5 +1,6 @@
 package com.hd.v01unit.item;
 
+import com.hd.common.exception.ErrorCode;
 import com.hd.v01.item.entity.ItemEntity;
 import com.hd.v01.item.repository.ItemRepository;
 import com.hd.v01.item.service.ItemService;
@@ -69,7 +70,7 @@ class ServiceGetAllTest {
         // then
         assertThatThrownBy(() -> itemService.getall())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("데이터가 좋재하지 않습니다."); // Exception 객체가 가지고있는 메시지 검증
+                .hasMessage(ErrorCode.DATA_DOSE_NOT_EXIST.getErrorMessage()); // Exception 객체가 가지고있는 메시지 검증
 
 
     }

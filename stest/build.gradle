@@ -51,8 +51,11 @@ dependencies {
     //8. Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
 
+//    // 9. path test
+    testImplementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+
     // gradle
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'  // 필수
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'  //
 
     // 1. Lombok Test
     testImplementation 'org.projectlombok:lombok'

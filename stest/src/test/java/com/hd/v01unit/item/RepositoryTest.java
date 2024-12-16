@@ -8,7 +8,9 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Import(value = com.hd.config.JpaAuditingConfig.class) // JPA Auditing
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName(" Repository Tests ")
+@ActiveProfiles("mysql")
 class RepositoryTest {
 
     @Autowired
@@ -32,7 +35,6 @@ class RepositoryTest {
 
     @Autowired
     EntityManager entityManager;
-
 
     @BeforeEach
     public void db_init() {

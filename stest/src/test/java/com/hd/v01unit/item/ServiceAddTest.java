@@ -91,14 +91,14 @@ class ServiceAddTest {
         ItemEntity itemEntity = ItemEntity.builder().id(id).name(name).price(price).build();
 
         // stub
-        when(itemRepository.save(any(ItemEntity.class))).thenThrow(new NameDuplicateException("Name duplicated", ErrorCode.NAME_DUPLICATION));
+        when(itemRepository.save(any(ItemEntity.class))).thenThrow(new NameDuplicateException(ErrorCode.NAME_DUPLICATED.getErrorMessage(), ErrorCode.NAME_DUPLICATED));
         //when(itemRepository.save(itemEntity)).thenThrow(
         //        new NameDuplicateException("Name duplicated", ErrorCode.NAME_DUPLICATION));
 
         // verify
         assertThatThrownBy(() -> itemService.save(itemEntity))
                 .isInstanceOf(NameDuplicateException.class)
-                .hasMessage("Name duplicated"); // Exception 객체가 가지고있는 메시지 검증
+                .hasMessage(ErrorCode.NAME_DUPLICATED.getErrorMessage()); // Exception 객체가 가지고있는 메시지 검증
 
     }
     @Test
@@ -115,7 +115,7 @@ class ServiceAddTest {
         assertThat(newItemEntity.getName()).isEqualTo(itemEntity.getName());
         assertThatThrownBy(() -> itemService.save(newItemEntity))
                 .isInstanceOf(NameDuplicateException.class)
-                .hasMessage("Name duplicated"); // Exception 객체가 가지고있는 메시지 검증
+                .hasMessage(ErrorCode.NAME_DUPLICATED.getErrorMessage()); // Exception 객체가 가지고있는 메시지 검증
 
     }
 

@@ -21,14 +21,14 @@ public class ItemResponseDto {
 
     // dto로 변환하는 메소드
 
-//    public ItemResponseDto toDto(ItemEntity itemEntity) {
-//        this.id = itemEntity.getId();
-//        this.name = itemEntity.getName();
-//        this.price = itemEntity.getPrice();
-//        this.createdAt = itemEntity.getCreatedAt();
-//        this.updatedAt = itemEntity.getUpdatedAt();
-//        return this;
-//    }
+    public ItemResponseDto toDto(ItemEntity itemEntity) {
+        this.id = itemEntity.getId();
+        this.name = itemEntity.getName();
+        this.price = itemEntity.getPrice();
+        this.createdAt = itemEntity.getCreatedAt();
+        this.updatedAt = itemEntity.getUpdatedAt();
+        return this;
+    }
 
 
     public ItemResponseDto(ItemEntity entity){

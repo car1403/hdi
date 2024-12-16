@@ -10,6 +10,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,17 +30,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Slf4j
 @WebMvcTest(controllers = ItemController.class)
-//@ComponentScan("com.hd.common.dto")
 //@AutoConfigureMockMvc
 //@SpringBootTest(classes = ItemController.class)
+@Import(value = com.hd.common.dto.Response.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName(" Controller Get Test ")
 public class ControllerGetTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    Response response;
+//    @MockBean
+//    Response response;
 
     @MockBean
     ItemService itemService;
@@ -60,21 +61,8 @@ public class ControllerGetTest {
 
         //given
         long id = 10L;
-        ItemEntity itemEntity = ItemEntity.builder().id(100L).name("p1").price(1000L).build();
-        Response.Body body = Response.Body.builder()
-                .state(200)
-                .data(itemEntity)
-                .result("success")
-                .massage("aa")
-                .error(Collections.emptyList())
-                .build();
 
-
-        ResponseEntity r= ResponseEntity.status(HttpStatus.OK).body(objectMapper.writeValueAsString(body));
-        log.info(r.getBody().toString());
-
-        given(itemService.get(any())).willReturn(ItemEntity.builder().id(100L).name("p1").price(1000L).build());
-        //given(response.success(any())).willReturn(r);
+        given(itemService.get(any())).willReturn(ItemEntity.builder().id(10L).name("p1").price(1000L).build());
 
         //when
         ResultActions resultActions= mockMvc.perform(get("/api/item/get/"+id));
@@ -82,7 +70,7 @@ public class ControllerGetTest {
         //verify
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.id").value(100L))
+                .andExpect(jsonPath("$.data.id").value(10L))
                 .andExpect(jsonPath("$.data.name").value("p1"))
                 .andExpect(jsonPath("$.data.price").value(1000L))
 

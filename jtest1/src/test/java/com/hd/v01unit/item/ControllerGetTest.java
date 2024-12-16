@@ -42,6 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@ComponentScan("com.hd.common.dto")
 //@AutoConfigureMockMvc
 //@SpringBootTest(classes = ItemController.class)
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName(" Controller Get Test ")
 public class ControllerGetTest {
@@ -70,7 +71,7 @@ public class ControllerGetTest {
 
         //given
         long id = 10L;
-        ItemEntity itemEntity = ItemEntity.builder().id(100L).name("p1").price(1000L).build();
+        ItemEntity itemEntity = ItemEntity.builder().id(10L).name("p1").price(1000L).build();
         Response.Body body = Response.Body.builder()
                 .state(200)
                 .data(itemEntity)
@@ -83,8 +84,8 @@ public class ControllerGetTest {
         ResponseEntity r= ResponseEntity.status(HttpStatus.OK).body(objectMapper.writeValueAsString(body));
         log.info(r.getBody().toString());
 
-        given(itemService.get(any())).willReturn(ItemEntity.builder().id(100L).name("p1").price(1000L).build());
-        //given(response.success(any())).willReturn(r);
+        given(itemService.get(any())).willReturn(ItemEntity.builder().id(10L).name("p1").price(1000L).build());
+        given(response.success(any())).willReturn(r);
 
         //when
         ResultActions resultActions= mockMvc.perform(get("/api/item/get/"+id));

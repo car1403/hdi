@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -34,14 +35,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@AutoConfigureMockMvc
 // @Service나 @Repository가 붙은 객체들도 모두 메모리에 올린다는 것이다.
 //@SpringBootTest
+@Import(value = com.hd.common.dto.Response.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName(" Controller save Test ")
 public class ControllerSaveTest {
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    Response response;
 
     @MockBean
     ItemService itemService;
