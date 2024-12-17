@@ -1,14 +1,13 @@
 package com.hd.v01unit.item;
 
-import com.hd.v01.item.entity.ItemEntity;
-import com.hd.v01.item.repository.ItemRepository;
+import com.hd.v1.item.entity.ItemEntity;
+import com.hd.v1.item.repository.ItemRepository;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 

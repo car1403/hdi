@@ -1,12 +1,12 @@
 package com.hd;
 
 
-import com.hd.v01.item.entity.CartEntity;
-import com.hd.v01.item.entity.CustEntity;
-import com.hd.v01.item.entity.ItemEntity;
-import com.hd.v01.item.repository.CartRepository;
-import com.hd.v01.item.repository.CustRepository;
-import com.hd.v01.item.repository.ItemRepository;
+import com.hd.v1.common.entity.CartEntity;
+import com.hd.v1.common.entity.CustEntity;
+import com.hd.v1.common.entity.ItemEntity;
+import com.hd.v1.app.cart.repository.CartRepository;
+import com.hd.v1.app.cust.repository.CustRepository;
+import com.hd.v1.app.item.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

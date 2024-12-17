@@ -3,7 +3,7 @@ package com.hd.v01integrate.item;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hd.common.exception.ErrorCode;
-import com.hd.v01.item.dto.request.ItemRequestDto;
+import com.hd.v1.item.dto.request.ItemRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;

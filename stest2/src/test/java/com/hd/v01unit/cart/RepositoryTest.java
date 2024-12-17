@@ -1,18 +1,18 @@
 package com.hd.v01unit.cart;
 
-import com.hd.v01.item.entity.CartEntity;
-import com.hd.v01.item.entity.CustEntity;
-import com.hd.v01.item.entity.ItemEntity;
-import com.hd.v01.item.repository.CartRepository;
-import com.hd.v01.item.repository.CustRepository;
-import com.hd.v01.item.repository.ItemRepository;
+import com.hd.v1.common.entity.CartEntity;
+import com.hd.v1.common.entity.CustEntity;
+import com.hd.v1.common.entity.ItemEntity;
+import com.hd.v1.app.cart.repository.CartRepository;
+import com.hd.v1.app.cust.repository.CustRepository;
+import com.hd.v1.app.item.repository.ItemRepository;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +30,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // 메모리 DB 사용 안함
 @Import(value = com.hd.config.JpaAuditingConfig.class) // JPA Auditing
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@Transactional
 @DisplayName(" Repository Tests ")
 @ActiveProfiles("h2")
 class RepositoryTest {
@@ -44,6 +43,9 @@ class RepositoryTest {
 
     @Autowired
     EntityManager entityManager;
+
+    @Autowired
+    TestEntityManager testEntityManager;
 
     CustEntity custEntity;
     ItemEntity itemEntity1, itemEntity2;
@@ -60,29 +62,38 @@ class RepositoryTest {
         entityManager
                 .createNativeQuery("ALTER TABLE db_cart ALTER COLUMN cart_id RESTART WITH 1") // auto increment 초기화
                 .executeUpdate();
+        entityManager
+                .createNativeQuery("ALTER TABLE db_item ALTER COLUMN item_id RESTART WITH 1") // auto increment 초기화
+                .executeUpdate();
 
 
         custEntity = custRepository.save(CustEntity.builder().id("id01").pwd("pwd01").name("name01").build());
         itemEntity1 = itemRepository.save(ItemEntity.builder().name("item01").price(1000L).build());
         itemEntity2 = itemRepository.save(ItemEntity.builder().name("item02").price(2000L).build());
+
         cartEntity1 = CartEntity.builder().cnt(1)
-                .custEntity(custEntity)
-                .itemEntity(itemEntity1)
+                .custEntity(CustEntity.builder().id("id01").build())
+                .itemEntity(ItemEntity.builder().id(1L).build())
                 .build();
         cartEntity2 = CartEntity.builder().cnt(3)
-                .custEntity(custEntity)
-                .itemEntity(itemEntity2)
+                .custEntity(CustEntity.builder().id("id01").build())
+                .itemEntity(ItemEntity.builder().id(2L).build())
                 .build();
+        cartRepository.save(cartEntity1);
+        cartRepository.save(cartEntity2);
+
+        // JPA 1차 캐쉬를 모두 삭제 즉 메모리에 있는 Entity 정보를 모두 삭제 후 테스트 진행 시 DB에 있는 데이터 조회
+        testEntityManager.flush();
+        testEntityManager.clear();
     }
 
     @Test
-    @DisplayName(" 1. Insert Test ")
+    @DisplayName(" 1 Cart Insert Test ")
     @Order(1)
-    public void save_test() { // 괄호안에 뭐 넣으면 안돼
+    public void cartSaveTest() { // 괄호안에 뭐 넣으면 안돼
 
         //given
-        cartRepository.save(cartEntity1);
-        cartRepository.save(cartEntity2);
+
 
         //when
 
@@ -101,12 +112,11 @@ class RepositoryTest {
 
     @Test
     @Order(2)
-    @DisplayName(" 2. FindById Test ")
-    public void findById_test() {
+    @DisplayName(" 2 Cart Item Delete Test ")
+    public void cartDeleteTest() {
 
         //given
-        cartRepository.save(cartEntity1);
-        cartRepository.save(cartEntity2);
+
         //when
         cartRepository.deleteById(1L);
         List<CartEntity> carts = cartRepository.findByCustId("id01");
@@ -114,6 +124,27 @@ class RepositoryTest {
 
         //verify
         assertThat(carts.size()).isEqualTo(1);
+    }
+    @Test
+    @Order(3)
+    @DisplayName(" 3 Cart Item Update Test ")
+    public void cartUpdateTest() {
+
+        //given
+
+        //when
+        CartEntity updatecartEntity = CartEntity.builder().id(1L).cnt(10)
+                .itemEntity(itemEntity1)
+                .custEntity(custEntity)
+                .build();
+
+        cartRepository.save(updatecartEntity);
+        List<CartEntity> carts = cartRepository.findByCustId("id01");
+        log.info(carts.toString());
+
+        //verify
+        assertThat(carts.size()).isEqualTo(2);
+        assertThat(carts.get(0).getCnt()).isEqualTo(10);
     }
 //
 //    @Test

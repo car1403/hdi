@@ -1,10 +1,8 @@
 package com.hd.v01unit.cust;
 
-import com.hd.v01.item.entity.CustEntity;
-import com.hd.v01.item.entity.ItemEntity;
-import com.hd.v01.item.repository.CustRepository;
-import com.hd.v01.item.repository.ItemRepository;
-import jakarta.persistence.EntityManager;
+
+import com.hd.v1.common.entity.CustEntity;
+import com.hd.v1.app.cust.repository.CustRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

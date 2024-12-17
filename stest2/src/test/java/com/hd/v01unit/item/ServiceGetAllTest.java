@@ -1,9 +1,9 @@
 package com.hd.v01unit.item;
 
 import com.hd.common.exception.ErrorCode;
-import com.hd.v01.item.entity.ItemEntity;
-import com.hd.v01.item.repository.ItemRepository;
-import com.hd.v01.item.service.ItemService;
+import com.hd.v1.common.entity.ItemEntity;
+import com.hd.v1.app.item.repository.ItemRepository;
+import com.hd.v1.app.item.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;

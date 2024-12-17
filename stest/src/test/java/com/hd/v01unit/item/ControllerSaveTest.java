@@ -1,17 +1,14 @@
 package com.hd.v01unit.item;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hd.common.dto.Response;
-import com.hd.v01.item.controller.ItemController;
-import com.hd.v01.item.dto.request.ItemRequestDto;
-import com.hd.v01.item.entity.ItemEntity;
-import com.hd.v01.item.service.ItemService;
+import com.hd.v1.item.controller.ItemController;
+import com.hd.v1.item.dto.request.ItemRequestDto;
+import com.hd.v1.item.entity.ItemEntity;
+import com.hd.v1.item.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
