@@ -33,7 +33,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
     // 3. MySQL Driver
     implementation 'com.mysql:mysql-connector-j:8.1.0'
