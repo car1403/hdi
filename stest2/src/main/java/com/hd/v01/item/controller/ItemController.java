@@ -2,16 +2,10 @@ package com.hd.v01.item.controller;
 
 
 import com.hd.common.dto.Response;
-import com.hd.common.dto.ResponseData;
 import com.hd.common.util.Helper;
 import com.hd.v01.item.dto.request.ItemRequestDto;
 import com.hd.v01.item.dto.response.ItemResponseDto;
 import com.hd.v01.item.service.ItemService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,12 +24,7 @@ public class ItemController {
     private final ItemService itemService;
     private final Response response;
 
-    @Operation(summary = "상품등록", description = "name, price를 입력받아 상품등록을 진행한다.")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = ResponseData.class))),
-            @ApiResponse(responseCode = "400", description = "name 또는 price 입력 오류", content = @Content(schema = @Schema(implementation = ResponseData.class))),
-            @ApiResponse(responseCode = "500", description = "name 중복 오류 ", content = @Content(schema = @Schema(implementation = ResponseData.class))),
-    })
+
     @PostMapping("/add")
     public ResponseEntity<?> add(@Validated @RequestBody ItemRequestDto dto, Errors errors) {
         // validation check
