@@ -33,6 +33,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
     // 3. MySQL Driver
     implementation 'com.mysql:mysql-connector-j:8.1.0'
@@ -75,8 +76,10 @@ test {
 jacocoTestReport {
     dependsOn test
     reports {
-        html.required = true
-        xml.required = false
+        xml.required = false;
+        csv.required = false;
+        //html.outputLocation = layout.projectDirectory.dir("$buildDir/src/reports44/html-report")
+        html.destination file('D://apache-tomcat-10.1.19//webapps//jacoco')
     }
 
     // 결과 리포트에서 제외할 클래스들

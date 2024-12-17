@@ -12,17 +12,7 @@
           </set>
         </option>
       </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="delegatedBuild" value="false" />
-        <option name="testRunner" value="PLATFORM" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/jtest1" />
-        <option name="gradleJvm" value="#JAVA_HOME" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/jtest1" />
-          </set>
-        </option>
-      </GradleProjectSettings>
+
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/stest" />
         <option name="gradleJvm" value="#JAVA_HOME" />
