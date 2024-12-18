@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/hdi.iml" filepath="$PROJECT_DIR$/hdi.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/stest.main.iml" filepath="$PROJECT_DIR$/.idea/modules/stest.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/stest.test.iml" filepath="$PROJECT_DIR$/.idea/modules/stest.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stest2.main.iml" filepath="$PROJECT_DIR$/.idea/modules/stest2.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stest2.test.iml" filepath="$PROJECT_DIR$/.idea/modules/stest2.test.iml" />
     </modules>
   </component>
 </project>

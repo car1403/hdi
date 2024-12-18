@@ -12,6 +12,9 @@
         <module name="stest2.test" />
       </profile>
     </annotationProcessing>
-
+    <bytecodeTargetLevel>
+      <module name="jtest1.main" target="17" />
+      <module name="jtest1.test" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
